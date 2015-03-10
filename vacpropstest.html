@@ -40,10 +40,17 @@ var map;
 
 function init(){
 
+  var southwest = L.latLng(40.18255, -74.85929),
+      northeast = L.latLng(40.27272, -74.67648),
+      boundary = L.latLngBounds(southwest, northeast);
 
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
-    center: [40.224, -74.76], zoom: 15,});
+    center: [40.224, -74.76], 
+    zoom: 15,
+    minZoom: 13,
+    maxBounds: boundary
+  });
 
 
   var cartoUrl = 'http://restoring-trenton.cartodb.com/api/v2/viz/a6f57b9c-c374-11e4-a69d-0e018d66dc29/viz.json';
@@ -164,9 +171,21 @@ cartodb.createLayer(map, cartoUrl)
   });
 
 
-}
-                
+  // var popup = L.popup();
 
+  // function onMapClick(e) {
+  //   popup
+  //     .setLatLng(e.latlng)
+  //     .setContent("You clicked the map at " + e.latlng.toString())
+  //     .openOn(map);
+  // }
+
+  // map.on('click', onMapClick);
+
+ 
+
+
+}
 
 
 </script>
