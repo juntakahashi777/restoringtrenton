@@ -151,7 +151,3 @@ cartodb.createLayer(map, cartoUrl)
   // map.on('click', onMapClick);
 
 }
-
-window.onload = function() {
-  init();
-};
