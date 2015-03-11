@@ -20,6 +20,9 @@ function init(){
     maxBounds: boundary
   });
 
+  new L.Control.GeoSearch({
+      provider: new L.GeoSearch.Provider.Google()
+  }).addTo(map);
 
   var cartoUrl = 'http://restoring-trenton.cartodb.com/api/v2/viz/a6f57b9c-c374-11e4-a69d-0e018d66dc29/viz.json';
 
