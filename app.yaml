@@ -12,6 +12,12 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /GeoSearch/css
+  static_dir: GeoSearch/css
+
+- url: /GeoSearch/js
+  static_dir: GeoSearch/js
+
 - url: .*
   script: main.app
 
