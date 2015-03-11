@@ -8,9 +8,7 @@ var map;
 
 function init(){
 
-  var southwest = L.latLng(40.18255, -74.85929),
-      northeast = L.latLng(40.27272, -74.67648),
-      boundary = L.latLngBounds(southwest, northeast);
+  var boundary = L.latLngBounds(config.southwest, config.northeast);
 
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
