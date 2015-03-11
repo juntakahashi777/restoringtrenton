@@ -31,8 +31,10 @@ L.GeoSearch.Provider.Google = L.Class.extend({
     GetLocations: function(qry, callback) {
         var geocoder = L.GeoSearch.Provider.Google.Geocoder;
 
+        var qry_in_city = qry + ", " + config.city;
+
         var parameters = L.Util.extend({
-            address: qry + ", Trenton"
+            address: qry_in_city
         }, this.options);
 
         var results = geocoder.geocode(parameters, function(data){
