@@ -18,6 +18,9 @@ class FeedbackHandler(webapp2.RequestHandler):
 	def get(self):
 		template = JINJA_ENVIRONMENT.get_template('templates/feedback.html')
 
+		template_values = {'latlng': self.request.get('latlng') }
+		self.response.write(template.render(template_values))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/feedback', FeedbackHandler)
