@@ -14,6 +14,11 @@ class MainHandler(webapp2.RequestHandler):
     	template = JINJA_ENVIRONMENT.get_template('templates/map_main.html')
         self.response.write(template.render())
 
+class FeedbackHandler(webapp2.RequestHandler):
+	def get(self):
+		template = JINJA_ENVIRONMENT.get_template('templates/feedback.html')
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/feedback', FeedbackHandler)
 ], debug=True)

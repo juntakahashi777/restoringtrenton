@@ -143,9 +143,11 @@ cartodb.createLayer(map, cartoUrl)
   var popup = L.popup();
 
   function onMapClick(e) {
+    var content = "You clicked the map at " + e.latlng.toString() + "\n\n"
+      + "<a href='feedback'>Send feedback?</a>"
     popup
       .setLatLng(e.latlng)
-      .setContent("You clicked the map at " + e.latlng.toString() + "\n\nSend feedback?")
+      .setContent(content)
       .openOn(map);
   }
 
