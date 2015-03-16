@@ -11,7 +11,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-    	template = JINJA_ENVIRONMENT.get_template('vacpropstest.html')
+    	template = JINJA_ENVIRONMENT.get_template('templates/map_main.html')
         self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
