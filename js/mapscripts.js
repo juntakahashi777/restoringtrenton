@@ -4,7 +4,24 @@ var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.rest
   
   
 var map;
-    
+var sql = new cartodb.SQL({ user: 'documentation', format: 'geojson' });
+var polygon;
+
+function showFeature(cartodb_id) {
+  // sql.execute("select ST_Simplify(the_geom, 0.1) as the_geom from european_countries_e where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
+  //   if (polygon) {
+  //     map.removeLayer(polygon);
+  //   }
+  //   polygon = L.geoJson(geojson, { 
+  //     style: {
+  //       color: "#fff",
+  //       fillColor: "#fff",
+  //       weight: 2,
+  //       opacity: 0.65
+  //     }
+  //   }).addTo(map);
+  // });
+}
 
 function init(){
 
@@ -80,6 +97,13 @@ cartodb.createLayer(map, cartoUrl)
     sublayer.set(vacantBldgsGet);
     sublayers.push(sublayer);
     overlayLayers["VACANT BUILDINGS"] = layer;
+
+    layer.setInteraction(true);
+
+    layer.on('featureClick', function(e, pos, latlng, data) {
+    showFeature(data.cartodb_id)
+    });
+
 
    }).on('error', function() { 
     //log the error
