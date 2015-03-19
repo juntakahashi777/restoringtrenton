@@ -7,10 +7,27 @@ var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
 
-function showFeature(cartodb_id) {
-  sql.execute("select ST_Simplify(the_geom, 0.1) as the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
+var popup = L.popup();
+
+function openPopup(pos) {
+  var latlng = L.latLng(pos[0], pos[1]);
+  console.log(latlng);
+  var contentString = "HELLO WORLD\n";
+  // var contentString = "You clicked the map at " + e.latlng.toString() + "\n\n"
+  //   + "<a href='feedback?latlng=" + e.latlng.toString() + "'>Send feedback?</a>"
+  popup
+    .setLatLng(latlng)
+    .setContent(contentString)
+    .openOn(map);
+}
+
+function showFeature(cartodb_id, pos) {
+  console.log(cartodb_id);
+  sql.execute("select the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
     if (polygon) {
       map.removeLayer(polygon);
+
+      openPopup(pos);
     }
     polygon = L.geoJson(geojson, { 
       style: {
@@ -101,9 +118,8 @@ cartodb.createLayer(map, cartoUrl)
     layer.setInteraction(true);
 
     layer.on('featureClick', function(e, pos, latlng, data) {
-    showFeature(data.cartodb_id)
+      showFeature(data.cartodb_id, pos)
     });
-
 
    }).on('error', function() { 
     //log the error
@@ -117,6 +133,12 @@ cartodb.createLayer(map, cartoUrl)
     sublayer.set(vacantLotsGet);
     sublayers.push(sublayer);
     overlayLayers["VACANT LOTS"] = layer;
+
+    layer.setInteraction(true);
+
+    layer.on('featureClick', function(e, pos, latlng, data) {
+      showFeature(data.cartodb_id, latlng)
+    });
 
    }).on('error', function() { 
     //log the error
@@ -162,20 +184,5 @@ cartodb.createLayer(map, cartoUrl)
    }).on('error', function() { 
     //log the error
   });
-
-
-  var popup = L.popup();
-
-  function onMapClick(e) {
-    var contentString = "You clicked the map at " + e.latlng.toString() + "\n\n"
-      + "<a href='feedback?latlng=" + e.latlng.toString() + "'>Send feedback?</a>"
-
-    popup
-      .setLatLng(e.latlng)
-      .setContent(contentString)
-      .openOn(map);
-  }
-
-  // map.on('click', onMapClick);
 
 }
