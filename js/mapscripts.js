@@ -11,10 +11,9 @@ var popup = L.popup();
 
 function openPopup(pos) {
   var latlng = L.latLng(pos[0], pos[1]);
-  console.log(latlng);
-  var contentString = "HELLO WORLD\n";
-  // var contentString = "You clicked the map at " + e.latlng.toString() + "\n\n"
-  //   + "<a href='feedback?latlng=" + e.latlng.toString() + "'>Send feedback?</a>"
+
+  var contentString = "You clicked the map at " + pos + "\n\n"
+    + "<a href='feedback?latlng=" + pos + "'>Send feedback?</a>"
   popup
     .setLatLng(latlng)
     .setContent(contentString)
@@ -22,12 +21,9 @@ function openPopup(pos) {
 }
 
 function showFeature(cartodb_id, pos) {
-  console.log(cartodb_id);
   sql.execute("select the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
     if (polygon) {
       map.removeLayer(polygon);
-
-      openPopup(pos);
     }
     polygon = L.geoJson(geojson, { 
       style: {
@@ -37,6 +33,8 @@ function showFeature(cartodb_id, pos) {
         opacity: 0.65
       }
     }).addTo(map);
+
+    openPopup(pos);
   });
 }
 
@@ -137,7 +135,7 @@ cartodb.createLayer(map, cartoUrl)
     layer.setInteraction(true);
 
     layer.on('featureClick', function(e, pos, latlng, data) {
-      showFeature(data.cartodb_id, latlng)
+      showFeature(data.cartodb_id, pos)
     });
 
    }).on('error', function() { 
