@@ -4,23 +4,23 @@ var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.rest
   
   
 var map;
-var sql = new cartodb.SQL({ user: 'documentation', format: 'geojson' });
+var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
 
 function showFeature(cartodb_id) {
-  // sql.execute("select ST_Simplify(the_geom, 0.1) as the_geom from european_countries_e where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
-  //   if (polygon) {
-  //     map.removeLayer(polygon);
-  //   }
-  //   polygon = L.geoJson(geojson, { 
-  //     style: {
-  //       color: "#fff",
-  //       fillColor: "#fff",
-  //       weight: 2,
-  //       opacity: 0.65
-  //     }
-  //   }).addTo(map);
-  // });
+  sql.execute("select ST_Simplify(the_geom, 0.1) as the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
+    if (polygon) {
+      map.removeLayer(polygon);
+    }
+    polygon = L.geoJson(geojson, { 
+      style: {
+        color: "#fff",
+        fillColor: "#fff",
+        weight: 2,
+        opacity: 0.65
+      }
+    }).addTo(map);
+  });
 }
 
 function init(){
@@ -176,6 +176,6 @@ cartodb.createLayer(map, cartoUrl)
       .openOn(map);
   }
 
-  map.on('click', onMapClick);
+  // map.on('click', onMapClick);
 
 }
