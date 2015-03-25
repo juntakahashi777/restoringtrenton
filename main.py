@@ -20,12 +20,11 @@ class MainHandler(webapp2.RequestHandler):
 
 class FeedbackHandler(webapp2.RequestHandler):
 	def get(self):
-		template = JINJA_ENVIRONMENT.get_template('templates/feedback.html')
-
-		template_values = {'latlng': self.request.get('latlng') }
-
+		latlng_var = str(config_json['feedback_latlng_var'])
+		latlng_value = str(self.request.get('latlng'))
 		url = 'https://docs.google.com/forms/d/1gEWl28gtcfvVr1-2D9e9yf556mKnvN2KBSUol6t1hnY/viewform' \
-			+ '?entry.' + str(config_json['feedback_latlng_var']) + '=' + str(self.request.get('latlng'))
+			+ '?' + latlng_var+ '=' + str(self.request.get('latlng'))
+		print url
 		self.redirect(url)
 
 
