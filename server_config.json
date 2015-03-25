@@ -1,3 +1,4 @@
 {
+	/* URL argument variable number, used to prefill Google Form latlng data */
 	"feedback_latlng_var": 439758060
 }
