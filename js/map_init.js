@@ -1,46 +1,15 @@
-
-
-var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>';
-  
-  
 var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
+var geocoder;
 
 var popup = L.popup();
+var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>';
 
-function openPopup(pos) {
-  var latlng = L.latLng(pos[0], pos[1]);
-
-  var contentString = "You clicked the map at " + pos + "\n\n"
-    + "<a href='feedback?latlng=" + pos + "'>Send feedback?</a>"
-  popup
-    .setLatLng(latlng)
-    .setContent(contentString)
-    .openOn(map);
-}
-
-function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
-    if (polygon) {
-      map.removeLayer(polygon);
-    }
-    polygon = L.geoJson(geojson, { 
-      style: {
-        color: "#fff",
-        fillColor: "#fff",
-        weight: 2,
-        opacity: 0.65
-      }
-    }).addTo(map);
-
-    openPopup(pos);
-  });
-}
 
 function init(){
-
   var boundary = L.latLngBounds(config.southwest, config.northeast);
+  geocoder = new google.maps.Geocoder();
 
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
@@ -61,7 +30,7 @@ function init(){
 
 
   var stamen = L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: additional_attrib + '<a href="http://stamen.com">Stamen</a>'});
-  stamen.addTo(map); 
+  stamen.addTo(map);
 
   var bases = { "STAMEN TONER BASEMAP": stamen };
 
