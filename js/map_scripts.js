@@ -1,23 +1,21 @@
-function latlng_reverse_geocoding(latlng) {
-	var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
-
-	// alert(g_latlng);
-	geocoder.geocode({'latLng': g_latlng}, function(results, status) {
-		alert('hello');
-	});
-}
-
 function openPopup(pos) {
   var latlng = L.latLng(pos[0], pos[1]);
+  var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
 
-  latlng_reverse_geocoding(latlng);
-
-  var contentString = "You clicked the map at " + pos + "\n\n"
-    + "<a href='feedback?latlng=" + pos + "'>Send feedback?</a>"
-  popup
-    .setLatLng(latlng)
-    .setContent(contentString)
-    .openOn(map);
+  var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) 
+    {
+      var address = results[0]['formatted_address'];
+      
+      var contentString = "You clicked the map at " + address + "\n\n"
+        + "<a href='feedback?latlng=" + pos + "'>Send feedback?</a>"
+      popup
+        .setLatLng(latlng)
+        .setContent(contentString)
+        .openOn(map);
+    }
+    else { alert('bad'); }
+  });
 }
 
 function showFeature(cartodb_id, pos) {
