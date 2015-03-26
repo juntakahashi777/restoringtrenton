@@ -21,6 +21,9 @@ handlers:
 - url: /GeoSearch/css
   static_dir: GeoSearch/css
 
+- url: /jquery
+  static_dir: jquery
+
 - url: .*
   script: main.app
 

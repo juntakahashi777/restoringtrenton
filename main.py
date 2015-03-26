@@ -17,9 +17,11 @@ class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		template = JINJA_ENVIRONMENT.get_template('templates/map_main.html')
 
-		template_values = {}
+		template_values = {
+			'query_addr': self.request.get('query_addr')
+		}
 
-		self.response.write(template.render())
+		self.response.write(template.render(template_values))
 
 class FeedbackHandler(webapp2.RequestHandler):
 	def get(self):
