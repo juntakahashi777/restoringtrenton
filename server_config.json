@@ -1,4 +1,4 @@
 {
-	"_comment": "feedback_latlng_var is a URL argument variable used to prefill Google Forms latlng data",
-	"feedback_latlng_var": "entry.439758060"
+	"_comment": "feedback_address_var is a URL argument variable used to prefill Google Forms",
+	"feedback_address_var": "entry.439758060"
 }

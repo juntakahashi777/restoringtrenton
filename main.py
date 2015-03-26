@@ -5,7 +5,7 @@ import webapp2
 import json
 
 with open('server_config.json') as config_file:
-	config_json = json.load(config_file)
+	server_config = json.load(config_file)
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -25,10 +25,10 @@ class MainHandler(webapp2.RequestHandler):
 
 class FeedbackHandler(webapp2.RequestHandler):
 	def get(self):
-		latlng_var = str(config_json['feedback_latlng_var'])
-		latlng_value = str(self.request.get('latlng'))
+		address_var = str(server_config['feedback_address_var'])
+		address_value = str(self.request.get('address'))
 		url = 'https://docs.google.com/forms/d/1gEWl28gtcfvVr1-2D9e9yf556mKnvN2KBSUol6t1hnY/viewform' \
-			+ '?' + latlng_var+ '=' + latlng_value
+			+ '?' + address_var+ '=' + address_value
 		self.redirect(url)
 
 
