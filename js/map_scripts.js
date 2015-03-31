@@ -7,8 +7,8 @@ function openPopup(pos) {
     {
       var address = results[0]['formatted_address'];
       
-      var contentString = "You clicked the map at " + address + "\n\n"
-        + "<a href='feedback?address=" + address + "'>Send feedback?</a>"
+      var contentString = "<p>" + address + "</p><p>"
+        + "<a href='feedback?address=" + address + "'>Send feedback about this address?</a></p>"
       popup
         .setLatLng(latlng)
         .setContent(contentString)
