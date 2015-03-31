@@ -21,6 +21,9 @@ handlers:
 - url: /GeoSearch/css
   static_dir: GeoSearch/css
 
+- url: /leaflet-search
+  static_dir: leaflet-search
+
 - url: /jquery
   static_dir: jquery
 
