@@ -88,7 +88,7 @@ function init(){
 
       layer.setInteraction(true);
 
-      layer.on('featureClick', function(e, latlng, pos, data) {
+      layer.on('featureClick', function(e, pos, latlng, data) {
         showFeature(data.cartodb_id, pos)
       });
 
@@ -107,7 +107,7 @@ function init(){
 
       layer.setInteraction(true);
 
-      layer.on('featureClick', function(e, latlng, pos, data) {
+      layer.on('featureClick', function(e, pos, latlng, data) {
         showFeature(data.cartodb_id, pos)
       });
 
