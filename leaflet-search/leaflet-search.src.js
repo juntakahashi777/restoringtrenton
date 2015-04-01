@@ -481,7 +481,6 @@ L.Control.Search = L.Control.extend({
 			retRecords = {},
 			propName = this.options.propertyName,
 			loc;
-		
 		this._layer.eachLayer(function(layer) {
 
 			if(layer instanceof SearchMarker) return;

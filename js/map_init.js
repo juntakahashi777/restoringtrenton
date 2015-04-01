@@ -9,7 +9,6 @@ var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.rest
 
 function init(){
   var boundary = L.latLngBounds(config.southwest, config.northeast);
-  geocoder = new google.maps.Geocoder();
 
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
@@ -80,10 +79,11 @@ function init(){
   // Add leaflet-search module
 
   var markersLayer = new L.LayerGroup();
-  map.addLayer(markersLayer);
+  // map.addLayer(markersLayer);
 
   var controlSearch = new L.Control.Search({layer: markersLayer, initial: false});
   map.addControl(controlSearch);
+
   // -------------------------
 
 
@@ -94,6 +94,7 @@ function init(){
   cartodb.createLayer(map, cartoUrl)
     .addTo(map)
     .on('done', function(layer) { 
+      console.log(layer);
       layer.setZIndex(2);
       var sublayer = layer.getSubLayer(0);
       sublayer.set(vacantBldgsGet);
@@ -101,6 +102,8 @@ function init(){
       overlayLayers["VACANT BUILDINGS"] = layer;
 
       layer.setInteraction(true);
+
+      markersLayer.addLayer(layer);
 
       layer.on('featureClick', function(e, pos, latlng, data) {
         showFeature(data.cartodb_id, pos)

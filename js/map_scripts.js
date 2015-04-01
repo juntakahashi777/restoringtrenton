@@ -35,3 +35,8 @@ function showFeature(cartodb_id, pos) {
     openPopup(pos);
   });
 }
+
+function runQuery(sql_query) {
+  console.log('Running Query');
+
+}

@@ -16,7 +16,7 @@ L.GeoSearch.Provider.Google = L.Class.extend({
 
     initialize: function(options) {
         options = L.Util.setOptions(this, options);
-        // this.loadMapsApi();
+        this.loadMapsApi();
     },
 
     loadMapsApi: function () {

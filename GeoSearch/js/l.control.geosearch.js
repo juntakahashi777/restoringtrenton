@@ -103,7 +103,6 @@ L.Control.GeoSearch = L.Control.extend({
 
     sendRequest: function (provider, url) {
         var that = this;
-
         window.parseLocation = function (response) {
             var results = provider.ParseJSON(response);
             that._processResults(results);
