@@ -39,5 +39,12 @@ function showFeature(cartodb_id, pos) {
 
 function runQuery(sql_query) {
   console.log('Running Query: ' + sql_query);
+  var sql_url = 'http://restoring-trenton.cartodb.com/api/v2/sql?q='
+  var query_string = 'SELECT * FROM ' + config.database_name + ' LIMIT 10'
 
+  $.getJSON(sql_url+query_string, function(data) {
+    $.each(data.rows, function(key, val) {
+      console.log(val);
+    });
+  });
 }
