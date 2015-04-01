@@ -44,7 +44,7 @@ function runQuery(sql_query) {
 
   $.getJSON(sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
-      console.log(val);
+      address = val.address
     });
   });
 }
