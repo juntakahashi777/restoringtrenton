@@ -3,7 +3,6 @@ var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
 
 var popup = L.popup();
-var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>';
 
 
 function init(){
