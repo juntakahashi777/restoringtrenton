@@ -8,7 +8,7 @@ var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.rest
 
 function init(){
   var boundary = L.latLngBounds(config.southwest, config.northeast);
-  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
+
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
     center: [40.224, -74.76], 
@@ -23,7 +23,7 @@ function init(){
   cartodb.createLayer(map, cartoUrl).addTo(map);
 
 
-  var stamen = L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: additional_attrib + '<a href="http://stamen.com">Stamen</a>'});
+  var stamen = L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: config.additional_attrib + '<a href="http://stamen.com">Stamen</a>'});
   stamen.addTo(map);
 
   var bases = { "STAMEN TONER BASEMAP": stamen };
@@ -41,27 +41,27 @@ function init(){
   //styling the different types of parcels -- add any others here
 
   var vacantLotsGet = {
-    sql: "SELECT * FROM master_properties where parc_type = 'VACANT LOT'",
+    sql: "SELECT * FROM " + config.database_name + " where parc_type = 'VACANT LOT'",
     cartocss: "#trenton_properties{polygon-fill: #B9D132; polygon-opacity:0.5;line-color:#fff; line-opacity:0.2;}",
   }
 
   var vacantBldgsGet = {
-    sql: "SELECT * FROM master_properties where parc_type = 'VACANT BLDG'",
+    sql: "SELECT * FROM " + config.database_name + " where parc_type = 'VACANT BLDG'",
     cartocss: "#trenton_properties{polygon-fill: #D11717; polygon-opacity:0.6;line-color: #fff; line-opacity:0.2;}"
   }
 
   var lienPropsGet = {
-    sql: "SELECT * FROM master_properties where (city_liens > 0 or priv_liens > 0)",
+    sql: "SELECT * FROM " + config.database_name + " where (city_liens > 0 or priv_liens > 0)",
     cartocss: "#trenton_properties{polygon-fill: #000; polygon-opacity:0.2;line-color:#000 ; line-width: 2; line-opacity:0.5;}"
   }
 
   var homesteadGet = {
-    sql: "SELECT * FROM master_properties where owner = 'CITY OF TRENTON' and class = '2' and parc_type = 'VACANT BLDG'",
+    sql: "SELECT * FROM " + config.database_name + " where owner = 'CITY OF TRENTON' and class = '2' and parc_type = 'VACANT BLDG'",
     cartocss: "#trenton_properties{polygon-fill: #00FBFF; polygon-opacity:0.2;line-color:#00FBFF ; line-width: 3; line-opacity:0.8;}"
   }
 
   var invisibleLayer = {
-    sql: "SELECT * FROM master_properties",
+    sql: "SELECT * FROM " + config.database_name + " ",
     cartocss: "#trenton_properties{polygon-opacity:0;line-color:#fff ; line-width: 1; line-opacity:0;}"
 
   }
