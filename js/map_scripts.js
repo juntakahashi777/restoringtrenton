@@ -45,6 +45,21 @@ function runQuery(sql_query) {
   $.getJSON(sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
       address = val.address
+
+      var geocoder = L.GeoSearch.Provider.Google.Geocoder;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        // console.log(results[0].geometry.location);
+        console.log(results[0].formatted_address);
+        // map.setCenter(results[0].geometry.location);
+        // var marker = new google.maps.Marker({
+        //     map: map,
+        //     position: results[0].geometry.location
+        // });
+      } else {
+        console.log("Geocode was not successful for the following reason: " + status);
+      }
+    });
     });
   });
 }
