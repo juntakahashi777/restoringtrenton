@@ -19,10 +19,6 @@ function init(){
     maxBounds: boundary
   });
 
-  new L.Control.GeoSearch({
-      provider: new L.GeoSearch.Provider.Google()
-  }).addTo(map);
-
   var cartoUrl = 'http://restoring-trenton.cartodb.com/api/v2/viz/a6f57b9c-c374-11e4-a69d-0e018d66dc29/viz.json';
 
   // layer - shows all property boundaries
@@ -71,6 +67,24 @@ function init(){
     cartocss: "#trenton_properties{polygon-opacity:0;line-color:#fff ; line-width: 1; line-opacity:0;}"
 
   }
+
+  // -------------------------
+  // Add geosearch module
+
+  new L.Control.GeoSearch({
+      provider: new L.GeoSearch.Provider.Google()
+  }).addTo(map);
+  // -------------------------
+
+  // -------------------------
+  // Add leaflet-search module
+
+  var markersLayer = new L.LayerGroup();
+  map.addLayer(markersLayer);
+
+  var controlSearch = new L.Control.Search({layer: markersLayer, initial: false});
+  map.addControl(controlSearch);
+  // -------------------------
 
 
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)
