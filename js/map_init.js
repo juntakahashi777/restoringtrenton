@@ -1,7 +1,6 @@
 var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
-var geocoder;
 
 var popup = L.popup();
 var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>';
@@ -9,7 +8,7 @@ var additional_attrib = 'Created by Iana Dikidjieva for <a href="http://www.rest
 
 function init(){
   var boundary = L.latLngBounds(config.southwest, config.northeast);
-
+  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
   // initiate leaflet map
   map = new L.Map('cartodb-map', {
     center: [40.224, -74.76], 
@@ -94,7 +93,6 @@ function init(){
   cartodb.createLayer(map, cartoUrl)
     .addTo(map)
     .on('done', function(layer) { 
-      console.log(layer);
       layer.setZIndex(2);
       var sublayer = layer.getSubLayer(0);
       sublayer.set(vacantBldgsGet);

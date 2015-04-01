@@ -2,6 +2,7 @@ function openPopup(pos) {
   var latlng = L.latLng(pos[0], pos[1]);
   var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
 
+  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
   var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) 
     {
@@ -37,6 +38,6 @@ function showFeature(cartodb_id, pos) {
 }
 
 function runQuery(sql_query) {
-  console.log('Running Query');
+  console.log('Running Query: ' + sql_query);
 
 }
