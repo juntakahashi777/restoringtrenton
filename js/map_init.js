@@ -4,7 +4,6 @@ var polygon;
 
 var popup = L.popup();
 
-
 function init(){
   var boundary = L.latLngBounds(config.southwest, config.northeast);
 
@@ -100,8 +99,6 @@ function init(){
 
       layer.setInteraction(true);
 
-      markersLayer.addLayer(layer);
-
       layer.on('featureClick', function(e, pos, latlng, data) {
         showFeature(data.cartodb_id, pos)
       });
@@ -165,6 +162,11 @@ function init(){
       var sublayer = layer.getSubLayer(0);
       sublayer.set(invisibleLayer);
       sublayers.push(sublayer);
+
+      layer.setInteraction(true);
+      layer.on('featureClick', function(e, pos, latlng, data) {
+        showFeature(data.cartodb_id, pos)
+      });
 
      }).on('error', function() { 
       //log the error
