@@ -15,7 +15,7 @@ function openPopup(pos) {
         .setContent(contentString)
         .openOn(map);
     }
-    else { alert('bad'); }
+    else { console.log('error in opening popup'); console.log(pos)}
   });
 }
 
@@ -40,26 +40,15 @@ function showFeature(cartodb_id, pos) {
 function runQuery(sql_query) {
   console.log('Running Query: ' + sql_query);
   var sql_url = 'http://restoring-trenton.cartodb.com/api/v2/sql?q='
-  var query_string = 'SELECT * FROM ' + config.database_name + ' LIMIT 10'
+  var query_string = "SELECT cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
+    " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
+
+    console.log(query_string)
 
   $.getJSON(sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
-      address = val.address
-
-      var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-      geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        // console.log(results[0].geometry.location);
-        console.log(results[0].formatted_address);
-        // map.setCenter(results[0].geometry.location);
-        // var marker = new google.maps.Marker({
-        //     map: map,
-        //     position: results[0].geometry.location
-        // });
-      } else {
-        console.log("Geocode was not successful for the following reason: " + status);
-      }
-    });
+      console.log(JSON.parse(val.st_asgeojson)["coordinates"].reverse())
+      showFeature(val.cartodb_id, JSON.parse(val.st_asgeojson)["coordinates"].reverse())
     });
   });
 }
