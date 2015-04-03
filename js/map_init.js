@@ -54,7 +54,7 @@ function init(){
   }
 
   var homesteadGet = {
-    sql: "SELECT * FROM " + config.database_name + " where owner = 'CITY OF TRENTON' and class = '2' and parc_type = 'VACANT BLDG'",
+    sql: "SELECT * FROM " + config.database_name + " where owner = 'CITY OF TRENTON' and class = '2' and parc_type = 'VACANT BLDG' and redev_area is not NULL",
     cartocss: "#trenton_properties{polygon-fill: #00FBFF; polygon-opacity:0.2;line-color:#00FBFF ; line-width: 3; line-opacity:0.8;}"
   }
 
