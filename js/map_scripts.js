@@ -20,7 +20,7 @@ function openPopup(pos) {
 }
 
 function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom from master_properties where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
+  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
     if (polygon) {
       map.removeLayer(polygon);
     }
