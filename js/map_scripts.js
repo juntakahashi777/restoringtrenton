@@ -39,13 +39,12 @@ function showFeature(cartodb_id, pos) {
 
 function runQuery(sql_query) {
   console.log('Running Query: ' + sql_query);
-  var sql_url = 'http://restoring-trenton.cartodb.com/api/v2/sql?q='
   var query_string = "SELECT address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
     " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
 
-    console.log(query_string)
-  $.getJSON(sql_url+query_string, function(data) {
-    console.log(data)
+  // console.log(query_string)
+  $.getJSON(config.sql_url+query_string, function(data) {
+    // console.log(data)
     $.each(data.rows, function(key, val) {
       L.marker(JSON.parse(val.st_asgeojson)["coordinates"].reverse())
         .addTo(map)
