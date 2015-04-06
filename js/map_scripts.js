@@ -16,7 +16,6 @@ function createMapLayer(map, cartoUrl, Zindex, sublayer) {
 
     }).on('error', function() {
     })
-
 }
 
 
