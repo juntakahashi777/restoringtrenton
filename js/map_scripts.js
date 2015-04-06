@@ -1,3 +1,25 @@
+function createMapLayer(map, cartoUrl, Zindex, sublayer) {
+  cartodb.createLayer(map, cartoUrl)
+    .addTo(map)
+    .on('done', function(layer) {
+      layer.setZIndex(Zindex);
+      var sublayer = layer.getSubLayer(0);
+      sublayer.set(sublayer);
+
+      overlayLayers["Vacant Buildings"] = layer;
+
+      layer.setInteraction(true);
+
+      layer.on('featureClick', function(e, pos, latlng, data) {
+        showFeature(data.cartodb_id, pos)
+      });
+
+    }).on('error', function() {
+    })
+
+}
+
+
 function openPopup(pos) {
   var latlng = L.latLng(pos[0], pos[1]);
   var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);

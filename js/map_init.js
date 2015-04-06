@@ -34,7 +34,6 @@ function init(){
   // map.addLayer(mapbox);
 
 
-  var sublayers = [];
 
   //styling the different types of parcels -- add any others here
 
@@ -64,6 +63,9 @@ function init(){
 
   }
 
+  var sublayers = [vacantLotsGet, vacantBldgsGet, lienPropsGet, homesteadGet, invisibleLayer];
+
+
   // -------------------------
   // Add geosearch module
 
@@ -87,6 +89,9 @@ function init(){
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)
 
   overlayLayers = {};
+
+  // createMapLayer(map, cartoUrl, 2, vacantBldgsGet);
+
 
   cartodb.createLayer(map, cartoUrl)
     .addTo(map)
