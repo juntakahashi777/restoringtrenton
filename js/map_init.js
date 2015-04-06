@@ -74,16 +74,6 @@ function init(){
   }).addTo(map);
   // -------------------------
 
-  // -------------------------
-  // Add leaflet-search module
-
-  var markersLayer = new L.LayerGroup();
-  // map.addLayer(markersLayer);
-
-  var controlSearch = new L.Control.Search({layer: markersLayer, initial: false});
-  map.addControl(controlSearch);
-
-  // -------------------------
 
 
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)
@@ -93,24 +83,24 @@ function init(){
   createMapLayer(map, cartoUrl, 2, vacantBldgsGet);
 
 
-  // cartodb.createLayer(map, cartoUrl)
-  //   .addTo(map)
-  //   .on('done', function(layer) { 
-  //     layer.setZIndex(2);
-  //     var sublayer = layer.getSubLayer(0);
-  //     sublayer.set(vacantBldgsGet);
-  //     sublayers.push(sublayer);
-  //     overlayLayers["VACANT BUILDINGS"] = layer;
+  cartodb.createLayer(map, cartoUrl)
+    .addTo(map)
+    .on('done', function(layer) { 
+      layer.setZIndex(2);
+      var sublayer = layer.getSubLayer(0);
+      sublayer.set(vacantBldgsGet);
+      sublayers.push(sublayer);
+      overlayLayers["VACANT BUILDINGS"] = layer;
 
-  //     layer.setInteraction(true);
+      layer.setInteraction(true);
 
-  //     layer.on('featureClick', function(e, pos, latlng, data) {
-  //       showFeature(data.cartodb_id, pos)
-  //     });
+      layer.on('featureClick', function(e, pos, latlng, data) {
+        showFeature(data.cartodb_id, pos)
+      });
 
-  //    }).on('error', function() { 
-  //     //log the error
-  //   });
+     }).on('error', function() { 
+      //log the error
+    });
 
   cartodb.createLayer(map, cartoUrl)
     .addTo(map)
