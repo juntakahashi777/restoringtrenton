@@ -80,7 +80,7 @@ function init(){
 
   overlayLayers = {};
 
-  createMapLayer(map, cartoUrl, 2, vacantBldgsGet);
+  // createMapLayer(map, cartoUrl, 2, vacantBldgsGet);
 
 
   cartodb.createLayer(map, cartoUrl)
