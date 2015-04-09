@@ -41,10 +41,13 @@ function openPopup(pos) {
 }
 
 function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} ).done(function(geojson) {
+  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
+  .done(function(geojson) {
     if (polygon) {
       map.removeLayer(polygon);
     }
+    console.log('here, geojson:')
+    console.log(geojson);
     polygon = L.geoJson(geojson, { 
       style: {
         color: "#fff",
@@ -60,18 +63,42 @@ function showFeature(cartodb_id, pos) {
 
 function runQuery(sql_query) {
   console.log('Running Query: ' + sql_query);
-  var query_string = "SELECT address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
+  var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
     " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
 
-  // console.log(query_string)
-  $.getJSON(config.sql_url+query_string, function(data) {
-    // console.log(data)
-    $.each(data.rows, function(key, val) {
-      L.marker(JSON.parse(val.st_asgeojson)["coordinates"].reverse())
-        .addTo(map)
-        .bindPopup("<p>" + val.address + "</p><p>"
-        + "<a href='feedback?address=" + val.address + "'>Send feedback about this address?</a></p>")
-      // showFeature(val.cartodb_id, JSON.parse(val.st_asgeojson)["coordinates"].reverse())
-    });
+  sql.execute(query_string).done(function(geojson) {
+    console.log('search geojson:');
+    console.log(geojson);
+    L.geoJson(geojson, { 
+      style: {
+        color: "#fff",
+        fillColor: "#fff",
+        weight: 2,
+        opacity: 0.65
+      }
+    }).addTo(map);
   });
+  // console.log(query_string)
+  // $.getJSON(config.sql_url+query_string, function(data) {
+  //   console.log('here, data:')
+  //   console.log(data);
+  //     L.geoJson(data.the_geom, { 
+  //       style: {
+  //         color: "#fff",
+  //         fillColor: "#fff",
+  //         weight: 2,
+  //         opacity: 0.65
+  //       }
+  //     }).addTo(map);
+
+  //   $.each(data.rows, function(key, val) {
+
+  //     // L.marker(JSON.parse(val.st_asgeojson)["coordinates"].reverse())
+  //     //   .addTo(map)
+  //     //   .bindPopup("<p>" + val.address + "</p><p>"
+  //     //   + "<a href='feedback?address=" + val.address + "'>Send feedback about this address?</a></p>")
+
+  //     // showFeature(val.cartodb_id, JSON.parse(val.st_asgeojson)["coordinates"].reverse())
+  //   });
+  // });
 }
