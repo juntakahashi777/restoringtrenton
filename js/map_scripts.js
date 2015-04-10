@@ -63,10 +63,10 @@ function showFeature(cartodb_id, pos) {
 
 function runQuery(sql_query) {
   console.log('Running Query: ' + sql_query);
-  var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
-    " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
-
-  sql.execute(query_string).done(function(geojson) {
+  // var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
+  //   " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
+  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = 27491")
+  .done(function(geojson) {
     console.log('search geojson:');
     console.log(geojson);
     L.geoJson(geojson, { 
