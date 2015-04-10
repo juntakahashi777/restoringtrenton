@@ -27,11 +27,11 @@ function init(){
   var bases = { "STAMEN TONER BASEMAP": stamen };
 
 
-  var mapbox = L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.satellite.json?access_token=pk.eyJ1IjoianVudGFrYWhhc2hpNzc3IiwiYSI6InB5NVlRUUEifQ.qPh-0ql3im5gInKu3dgJiw',
-      {
-        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-      });
-  map.addLayer(mapbox);
+  // var mapbox = L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.satellite.json?access_token=pk.eyJ1IjoianVudGFrYWhhc2hpNzc3IiwiYSI6InB5NVlRUUEifQ.qPh-0ql3im5gInKu3dgJiw',
+  //     {
+  //       attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+  //     });
+  // map.addLayer(mapbox);
 
 
 

@@ -69,16 +69,16 @@ function runQuery(sql_query) {
   $.getJSON(config.sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
       sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: val.cartodb_id} )
-      .done(makePolygon);
+      .done(makePolygon, "#111");
     });
   });
 }
 
-function makePolygon(geojson) {
+function makePolygon(geojson, colorStr) {
   L.geoJson(geojson, { 
     style: {
-      color: "#111",
-      fillColor: "#111",
+      color: colorStr,
+      fillColor: colorStr,
       weight: 2,
       opacity: 0.65
     }
