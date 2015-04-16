@@ -72,8 +72,21 @@ function init(){
   new L.Control.GeoSearch({
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
-  // -------------------------
 
+  // -------------------------
+  // Add sidebar module
+
+  var div_sidebar = document.createElement('div');
+  div_sidebar.id = "sidebar";
+  $('body')[0].appendChild(div_sidebar);
+
+  var sidebar = L.control.sidebar('sidebar', {
+      position: 'left'
+  });
+
+  map.addControl(sidebar);
+  sidebar_init(sidebar)
+  // -------------------------
 
 
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)
