@@ -46,8 +46,7 @@ function showFeature(cartodb_id, pos) {
     if (polygon) {
       map.removeLayer(polygon);
     }
-    console.log('here, geojson:')
-    console.log(geojson);
+
     polygon = L.geoJson(geojson, { 
       style: {
         color: "#fff",
@@ -69,19 +68,22 @@ function runQuery(sql_query) {
   $.getJSON(config.sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
       sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: val.cartodb_id} )
-      .done(makePolygon, "#111");
+      .done(makePolygon);
     });
   });
 }
 
-function makePolygon(geojson, colorStr) {
+function makePolygon(geojson) {
+  colorStr = "#111";
   L.geoJson(geojson, { 
     style: {
       color: colorStr,
       fillColor: colorStr,
       weight: 2,
       opacity: 0.65
-    }
+    },
+    onEachFeature: showFeature
   }).addTo(map);
+
 }
 
