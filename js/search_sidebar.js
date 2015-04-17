@@ -1,5 +1,24 @@
 function sidebar_init (sidebar) {
-  sidebar.setContent("<h1>Advanced Search</h1>");
+  sidebar.setContent("<h1>Advanced Search</h1>\
+    <form name='advanced_search' onSubmit='return advanced_geosearch();'>\
+    <fieldset>\
+    <legend>Query:</legend>\
+    Address:<br>\
+    <input type='text' name='address'>\
+    <br>\
+    Lot Type:<br>\
+    <input type='text' name='lot_type'>\
+    <br><br>\
+    <input type='submit' value='Go'>\
+    </fieldset>\
+    </form>\
+    ");
+}
+
+// returns false in order to prevent page redirect on form submit
+function advanced_geosearch () {
+    console.log("called advanced search!");
+    return false;
 }
 
 L.Control.EasyButtons = L.Control.extend({
