@@ -69,10 +69,17 @@ function init(){
   // -------------------------
   // Add geosearch module
 
-  new L.Control.GeoSearch({
+  var searchBar = new L.Control.GeoSearch({
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
 
+  L.easyButton('', 
+              function (){
+                sidebar.show();
+              },
+             'Open Advanced Search'
+            );
+  
   // -------------------------
   // Add sidebar module
 
