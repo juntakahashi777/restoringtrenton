@@ -31,7 +31,7 @@ L.GeoSearch.Provider.Google = L.Class.extend({
     GetLocations: function(qry, callback) {
         var geocoder = L.GeoSearch.Provider.Google.Geocoder;
 
-        runQuery(qry);
+        // runQuery(qry);
 
         var qry_in_city = qry + ", " + config.city;
 

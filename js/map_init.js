@@ -1,6 +1,7 @@
 var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
+var searchModule;
 
 var popup = L.popup();
 
@@ -69,7 +70,7 @@ function init(){
   // -------------------------
   // Add geosearch module
 
-  var searchBar = new L.Control.GeoSearch({
+  searchModule = new L.Control.GeoSearch({
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
 
