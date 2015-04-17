@@ -20,8 +20,8 @@ function advanced_geosearch () {
 
   try {
     searchModule.geosearch(address);
+    runQuery(queryFields);
   }
-
   catch (error) {
   }
 
