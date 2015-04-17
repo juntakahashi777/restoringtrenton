@@ -16,15 +16,15 @@ function sidebar_init (sidebar) {
 }
 
 function advanced_geosearch () {
-  console.log("called advanced search!");
   var address = $('#address')[0].value;
 
   try {
     searchModule.geosearch(address);
   }
+
   catch (error) {
   }
-  
+
   // returns false in order to prevent page redirect on form submit    
   return false;
 }
