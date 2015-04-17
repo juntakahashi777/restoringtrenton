@@ -21,7 +21,7 @@ function advanced_geosearch () {
     return false;
 }
 
-L.Control.EasyButtons = L.Control.extend({
+L.Control.EasyButton = L.Control.extend({
     options: {
         position: 'topleft',
         title: '',
@@ -58,7 +58,7 @@ L.Control.EasyButtons = L.Control.extend({
 });
 
 L.easyButton = function( btnIcon , btnFunction , btnTitle , btnMap , btnId) {
-  var newControl = new L.Control.EasyButtons;
+  var newControl = new L.Control.EasyButton;
 
   if (btnIcon) newControl.options.intendedIcon = btnIcon;
   if (btnId) newControl.options.id = btnId;
