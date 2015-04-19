@@ -7,7 +7,13 @@ function sidebar_init (sidebar) {
     <input type='text' id='address'>\
     <br>\
     Lot Type:<br>\
-    <input type='text' id='lot_type'>\
+    <select id='lot_type'>\
+    <option value='any'>Select a lot type</option>\
+    <option value='vacant_building'>Vacant Building</option>\
+    <option value='vacant_lot'>Vacant Lot</option>\
+    <option value='occupied_building'>Occupied Building</option>\
+    <option value='unoccupied_building'>Unoccupied Building</option>\
+    </select>\
     <br><br>\
     <input type='submit' value='Go'>\
     </fieldset>\
@@ -17,10 +23,12 @@ function sidebar_init (sidebar) {
 
 function advanced_geosearch () {
   var address = $('#address')[0].value;
+  var options = {};
+  options.lotType = $('#lot_type')[0].value;
 
   try {
     searchModule.geosearch(address);
-    runQuery(address);
+    runQuery(address, options);
   }
   catch (error) {
   }
