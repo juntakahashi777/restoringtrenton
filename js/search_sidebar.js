@@ -24,7 +24,8 @@ function sidebar_init (sidebar) {
 function advanced_geosearch () {
   var address = $('#address')[0].value;
   var options = {};
-  options.lotType = $('#lot_type')[0].value;
+  options.lot_type = $('#lot_type')[0].value;
+  console.log('HERE: ' + options.lotType);
 
   try {
     searchModule.geosearch(address);
