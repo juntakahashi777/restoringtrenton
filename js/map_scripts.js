@@ -97,13 +97,13 @@ function runQuery(qry_addr, options) {
 }
 
 function makePolygon(geojson) {
-  colorStr = "#D10";
+  colorStr = "#E10";
   var polygon = L.geoJson(geojson, { 
     style: {
       color: colorStr,
       fillColor: colorStr,
-      weight: 2,
-      opacity: 0.65
+      weight: 2.5,
+      opacity: 0.95
     }
   }).addTo(map);
 

@@ -47,7 +47,7 @@ function init(){
 
   var vacantBldgsGet = {
     sql: "SELECT * FROM " + config.database_name + " where parc_type = 'VACANT BLDG'",
-    cartocss: "#trenton_properties{polygon-fill: #D11717; polygon-opacity:0.6;line-color: #fff; line-opacity:0.2;}"
+    cartocss: "#trenton_properties{polygon-fill: #FF9933; polygon-opacity:0.6;line-color: #fff; line-opacity:0.2;}"
   }
 
   var lienPropsGet = {
