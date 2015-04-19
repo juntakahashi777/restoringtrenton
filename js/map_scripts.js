@@ -78,7 +78,7 @@ function runQuery(sql_query, options) {
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
   query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25')";
-  if (options.parc_type != null)
+  if (options.parc_type != 'any')
     query_string += " AND parc_type = '" + options.parc_type + "'";
   query_string += " LIMIT 10";
 
