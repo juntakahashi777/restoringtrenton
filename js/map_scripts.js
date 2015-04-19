@@ -47,7 +47,7 @@ function showFeature(cartodb_id, pos) {
       map.removeLayer(polygon);
     }
 
-    polygon = L.geoJson(geojson, { 
+    polygon = L.geoJson(geojson, {
       style: {
         color: "#fff",
         fillColor: "#fff",
@@ -56,11 +56,20 @@ function showFeature(cartodb_id, pos) {
       }
     }).addTo(map);
 
+    searchResults.push(polygon);
+    console.log("pushing polygon");
+
     openPopup(pos);
   });
 }
 
 function runQuery(sql_query) {
+
+  searchResults.forEach(function(entry) {
+    console.log(entry);
+  });
+  console.log(searchResults);
+
   console.log('Running Query: ' + sql_query);
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
     " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"

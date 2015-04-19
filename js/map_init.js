@@ -1,6 +1,7 @@
 var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
+var searchResults = [];
 var searchModule;
 
 var popup = L.popup();
@@ -74,7 +75,7 @@ function init(){
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
 
-  L.easyButton('', 
+  L.easyButton('fa-compass', 
               function (){
                 sidebar.show();
               },
