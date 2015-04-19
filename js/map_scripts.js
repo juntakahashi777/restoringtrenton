@@ -40,26 +40,6 @@ function openPopup(pos) {
   });
 }
 
-function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
-  .done(function(geojson) {
-    if (polygon) {
-      map.removeLayer(polygon);
-    }
-
-    polygon = L.geoJson(geojson, {
-      style: {
-        color: "#fff",
-        fillColor: "#fff",
-        weight: 2,
-        opacity: 0.65
-      }
-    }).addTo(map);
-
-    openPopup(pos);
-  });
-}
-
 function runQuery(sql_query, options) {
   console.log('running sql query: '+sql_query);
   // for (var opt in options)
@@ -69,7 +49,6 @@ function runQuery(sql_query, options) {
   // }
 
   searchResults.forEach(function(entry) {
-    console.log(entry);
     map.removeLayer(entry);
   });
 
@@ -82,7 +61,8 @@ function runQuery(sql_query, options) {
   console.log('query string: ' + query_string);
   $.getJSON(config.sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
-      sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: val.cartodb_id} )
+      query_string = "select the_geom from " + config.database_name + " where cartodb_id = " + val.cartodb_id;
+      sql.execute(query_string)
       .done(makePolygon);
     });
   });
@@ -96,11 +76,9 @@ function makePolygon(geojson) {
       fillColor: colorStr,
       weight: 2,
       opacity: 0.65
-    },
-    onEachFeature: showFeature
+    }
   }).addTo(map);
 
   searchResults.push(polygon);
-  console.log("pushing polygon");
 }
 
