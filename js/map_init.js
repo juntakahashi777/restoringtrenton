@@ -94,7 +94,7 @@ function init(){
   });
 
   map.addControl(sidebar);
-  sidebar_init(sidebar)
+  sidebar.setContent(config.sidebar_content);
   // -------------------------
 
 
