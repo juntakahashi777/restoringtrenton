@@ -25,5 +25,6 @@ var config =
 	    <input type='submit' value='Go'>\
 	    </fieldset>\
 	    </form>\
-    "
+    ",
+    search_results_limit : "100"
 }

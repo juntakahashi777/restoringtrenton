@@ -2,7 +2,6 @@ function advanced_geosearch () {
   var address = $('#address')[0].value;
   var options = {};
   options.parc_type = $('#parc_type')[0].value;
-  console.log('HERE: ' + options.lotType);
 
   try {
     searchModule.geosearch(address);

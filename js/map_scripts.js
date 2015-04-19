@@ -56,7 +56,7 @@ function runQuery(sql_query, options) {
   query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25')";
   if (options.parc_type != 'any')
     query_string += " AND parc_type = '" + options.parc_type + "'";
-  query_string += " LIMIT 10";
+  query_string += " LIMIT " + config.search_results_limit;
 
   console.log('query string: ' + query_string);
   $.getJSON(config.sql_url+query_string, function(data) {
