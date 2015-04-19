@@ -40,8 +40,17 @@ function openPopup(pos) {
   });
 }
 
-function runQuery(sql_query, options) {
-  console.log('running sql query: '+sql_query);
+function cleanAddress(qry_addr) {
+  var cleaned_addr = 
+    qry_addr.replace(/street/ig, 'st')
+    .replace(/avenue/ig, 'ave')
+    .replace(/alley/ig, 'al')
+  return cleaned_addr;
+}
+
+function runQuery(qry_addr, options) {
+  var cleaned_addr = cleanAddress(qry_addr);
+  console.log('running sql query: '+cleaned_addr);
   // for (var opt in options)
   // {
   //   console.log(opt);
@@ -53,7 +62,7 @@ function runQuery(sql_query, options) {
   });
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
-  query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25')";
+  query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + cleaned_addr + "%25')";
   if (options.parc_type != 'any')
     query_string += " AND parc_type = '" + options.parc_type + "'";
   query_string += " LIMIT " + config.search_results_limit;
