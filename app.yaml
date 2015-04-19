@@ -24,8 +24,8 @@ handlers:
 - url: /leaflet-sidebar
   static_dir: leaflet-sidebar
 
-- url: /leaflet-search
-  static_dir: leaflet-search
+- url: /leaflet-navbar
+  static_dir: leaflet-navbar
 
 - url: /jquery
   static_dir: jquery
