@@ -56,9 +56,6 @@ function showFeature(cartodb_id, pos) {
       }
     }).addTo(map);
 
-    searchResults.push(polygon);
-    console.log("pushing polygon");
-
     openPopup(pos);
   });
 }
@@ -73,6 +70,7 @@ function runQuery(sql_query, options) {
 
   searchResults.forEach(function(entry) {
     console.log(entry);
+    map.removeLayer(entry);
   });
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
@@ -86,14 +84,13 @@ function runQuery(sql_query, options) {
     $.each(data.rows, function(key, val) {
       sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: val.cartodb_id} )
       .done(makePolygon);
-      console.log(val.cartodb_id);
     });
   });
 }
 
 function makePolygon(geojson) {
-  colorStr = "#111";
-  L.geoJson(geojson, { 
+  colorStr = "#333";
+  var polygon = L.geoJson(geojson, { 
     style: {
       color: colorStr,
       fillColor: colorStr,
@@ -103,5 +100,7 @@ function makePolygon(geojson) {
     onEachFeature: showFeature
   }).addTo(map);
 
+  searchResults.push(polygon);
+  console.log("pushing polygon");
 }
 
