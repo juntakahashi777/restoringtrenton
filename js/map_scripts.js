@@ -74,15 +74,20 @@ function runQuery(sql_query, options) {
   searchResults.forEach(function(entry) {
     console.log(entry);
   });
-  console.log(searchResults);
+  // console.log(searchResults);
 
-  var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name + 
-    " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25') LIMIT 10"
+  var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
+  query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + sql_query + "%25')";
+  if (options.parc_type != null)
+    query_string += " AND parc_type = '" + options.parc_type + "'";
+  query_string += " LIMIT 10";
 
+  console.log('query string: ' + query_string);
   $.getJSON(config.sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
       sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: val.cartodb_id} )
       .done(makePolygon);
+      console.log(val.cartodb_id);
     });
   });
 }
