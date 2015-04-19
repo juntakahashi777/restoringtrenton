@@ -77,7 +77,7 @@ function init(){
 
   L.easyButton('fa-compass', 
               function (){
-                sidebar.show();
+                sidebar.toggle();
               },
              'Open Advanced Search'
             );
