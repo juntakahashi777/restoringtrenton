@@ -61,9 +61,9 @@ function openPopup(pos) {
 
 function cleanAddress(qry_addr) {
   var cleaned_addr = 
-    qry_addr.replace(/street/ig, 'st')
-    .replace(/avenue/ig, 'ave')
-    .replace(/alley/ig, 'al')
+    qry_addr.replace(/ street/ig, ' st')
+    .replace(/ avenue/ig, ' ave')
+    .replace(/ alley/ig, ' al')
   return cleaned_addr;
 }
 
@@ -97,7 +97,7 @@ function runQuery(qry_addr, options) {
 }
 
 function makePolygon(geojson) {
-  colorStr = "#333";
+  colorStr = "#D10";
   var polygon = L.geoJson(geojson, { 
     style: {
       color: colorStr,
