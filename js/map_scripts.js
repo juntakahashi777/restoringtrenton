@@ -18,6 +18,25 @@ function createMapLayer(map, cartoUrl, Zindex, sublayer) {
     })
 }
 
+function showFeature(cartodb_id, pos) {
+  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
+  .done(function(geojson) {
+    if (polygon) {
+      map.removeLayer(polygon);
+    }
+
+    polygon = L.geoJson(geojson, {
+      style: {
+        color: "#fff",
+        fillColor: "#fff",
+        weight: 2,
+        opacity: 0.65
+      }
+    }).addTo(map);
+
+    openPopup(pos);
+  });
+}
 
 function openPopup(pos) {
   var latlng = L.latLng(pos[0], pos[1]);
