@@ -75,7 +75,7 @@ function init(){
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
 
-  L.easyButton('fa-compass', 
+  L.easyButton('fa-search-plus', 
               function (){
                 sidebar.toggle();
               },
