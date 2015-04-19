@@ -6,6 +6,7 @@ function advanced_geosearch () {
   try {
     searchModule.geosearch(address);
     runQuery(address, options);
+    sidebar.hide();
   }
   catch (error) {
   }

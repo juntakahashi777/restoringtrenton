@@ -3,6 +3,7 @@ var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
 var searchResults = [];
 var searchModule;
+var sidebar;
 
 var popup = L.popup();
 
@@ -89,7 +90,7 @@ function init(){
   div_sidebar.id = "sidebar";
   $('body')[0].appendChild(div_sidebar);
 
-  var sidebar = L.control.sidebar('sidebar', {
+  sidebar = L.control.sidebar('sidebar', {
       position: 'left'
   });
 
