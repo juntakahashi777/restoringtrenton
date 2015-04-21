@@ -19,22 +19,22 @@ function createMapLayer(map, cartoUrl, Zindex, sublayer) {
 }
 
 function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
+  sql.execute("select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
   .done(function(geojson) {
     if (polygon) {
       map.removeLayer(polygon);
     }
+    makePolygon(geojson);
+    // polygon = L.geoJson(geojson, {
+    //   style: {
+    //     color: "#fff",
+    //     fillColor: "#fff",
+    //     weight: 2,
+    //     opacity: 0.65
+    //   }
+    // }).addTo(map);
 
-    polygon = L.geoJson(geojson, {
-      style: {
-        color: "#fff",
-        fillColor: "#fff",
-        weight: 2,
-        opacity: 0.65
-      }
-    }).addTo(map);
-
-    openPopup(pos);
+    // openPopup(pos);
   });
 }
 
@@ -70,11 +70,6 @@ function cleanAddress(qry_addr) {
 function runQuery(qry_addr, options) {
   var cleaned_addr = cleanAddress(qry_addr);
   console.log('running sql query: '+cleaned_addr);
-  // for (var opt in options)
-  // {
-  //   console.log(opt);
-  //   console.log(options[opt]);
-  // }
 
   searchResults.forEach(function(entry) {
     map.removeLayer(entry);
@@ -91,29 +86,34 @@ function runQuery(qry_addr, options) {
     $.each(data.rows, function(key, val) {
       query_string = "select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = " + val.cartodb_id;
       sql.execute(query_string)
-      .done(makePolygon);
+      .done(function(geojson) {
+        if (polygon) {
+          map.removeLayer(polygon);
+        }
+        makePolygon(geojson);
+      });
     });
   });
 }
 
 function onEachFeature(feature, layer) {
   var centroid = JSON.parse(feature.properties.st_asgeojson).coordinates;
-  console.log(centroid);
   // swap lat-lng
   var lat = centroid[1];
   var lng = centroid[0];
   centroid = [lat, lng];
 
   layer.on('click', function(e) {
-    console.log('clicked');
     openPopup(centroid);
   });
 
 }
 
-function makePolygon(geojson) {
+function makePolygon(geojson, color) {
+  // console.log('color arg : ' + color);
+  // console.log(geojson);
   colorStr = "#E10";
-  var polygon = L.geoJson(geojson, { 
+  polygon = L.geoJson(geojson, { 
     style: {
       color: colorStr,
       fillColor: colorStr,
