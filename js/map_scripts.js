@@ -96,6 +96,10 @@ function runQuery(qry_addr, options) {
   });
 }
 
+function onEachFeature(feature, layer) {
+  console.log('feature : ' + feature.toSource() + ', layer : ' + layer.toSource());
+}
+
 function makePolygon(geojson) {
   colorStr = "#E10";
   var polygon = L.geoJson(geojson, { 
@@ -104,7 +108,8 @@ function makePolygon(geojson) {
       fillColor: colorStr,
       weight: 2.5,
       opacity: 0.95
-    }
+    },
+    onEachFeature : onEachFeature
   }).addTo(map);
 
   searchResults.push(polygon);
