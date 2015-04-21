@@ -21,20 +21,7 @@ function createMapLayer(map, cartoUrl, Zindex, sublayer) {
 function showFeature(cartodb_id, pos) {
   sql.execute("select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
   .done(function(geojson) {
-    if (polygon) {
-      map.removeLayer(polygon);
-    }
-    makePolygon(geojson);
-    // polygon = L.geoJson(geojson, {
-    //   style: {
-    //     color: "#fff",
-    //     fillColor: "#fff",
-    //     weight: 2,
-    //     opacity: 0.65
-    //   }
-    // }).addTo(map);
-
-    // openPopup(pos);
+    makePolygon(geojson, isAdvancedSearch=false);
   });
 }
 
@@ -87,10 +74,7 @@ function runQuery(qry_addr, options) {
       query_string = "select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = " + val.cartodb_id;
       sql.execute(query_string)
       .done(function(geojson) {
-        if (polygon) {
-          map.removeLayer(polygon);
-        }
-        makePolygon(geojson);
+        makePolygon(geojson, isAdvancedSearch=true);
       });
     });
   });
@@ -109,20 +93,34 @@ function onEachFeature(feature, layer) {
 
 }
 
-function makePolygon(geojson, color) {
-  // console.log('color arg : ' + color);
-  // console.log(geojson);
-  colorStr = "#E10";
-  polygon = L.geoJson(geojson, { 
-    style: {
-      color: colorStr,
-      fillColor: colorStr,
-      weight: 2.5,
-      opacity: 0.95
-    },
-    onEachFeature : onEachFeature
-  }).addTo(map);
+function makePolygon(geojson, isAdvancedSearch) {
+  if (polygon) {
+    map.removeLayer(polygon);
+  }
+  if (isAdvancedSearch)
+  {
 
-  searchResults.push(polygon);
+    var multipolygon = L.geoJson(geojson, { 
+      style: {
+        color: "#E10",
+        fillColor: "#E10",
+        weight: 2.5,
+        opacity: 0.95
+      },
+      onEachFeature : onEachFeature
+    }).addTo(map);
+    searchResults.push(multipolygon);
+  }
+  else
+  {
+    polygon = L.geoJson(geojson, {
+      style: {
+        color: "#fff",
+        fillColor: "#fff",
+        weight: 2,
+        opacity: 0.65
+      }
+    }).addTo(map);
+  }
 }
 
