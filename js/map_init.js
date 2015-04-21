@@ -120,11 +120,11 @@ function init(){
       sublayers.push(sublayer);
       overlayLayers["VACANT BUILDINGS"] = layer;
 
-      layer.setInteraction(true);
+      // layer.setInteraction(true);
 
-      layer.on('featureClick', function(e, pos, latlng, data) {
-        showFeature(data.cartodb_id, pos)
-      });
+      // layer.on('featureClick', function(e, pos, latlng, data) {
+      //   showFeature(data.cartodb_id, pos)
+      // });
 
      }).on('error', function() { 
       //log the error
@@ -139,11 +139,11 @@ function init(){
       sublayers.push(sublayer);
       overlayLayers["VACANT LOTS"] = layer;
 
-      layer.setInteraction(true);
+      // layer.setInteraction(true);
 
-      layer.on('featureClick', function(e, pos, latlng, data) {
-        showFeature(data.cartodb_id, pos)
-      });
+      // layer.on('featureClick', function(e, pos, latlng, data) {
+      //   showFeature(data.cartodb_id, pos)
+      // });
 
      }).on('error', function() { 
       //log the error

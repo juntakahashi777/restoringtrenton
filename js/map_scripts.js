@@ -25,27 +25,6 @@ function showFeature(cartodb_id, pos) {
   });
 }
 
-function openPopup(pos) {
-  var latlng = L.latLng(pos[0], pos[1]);
-  var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
-
-  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-  var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) 
-    {
-      var address = results[0]['formatted_address'];
-      
-      var contentString = "<p>" + address + "</p><p>"
-        + "<a href='feedback?address=" + address + "'>Send feedback about this address?</a></p>"
-      popup
-        .setLatLng(latlng)
-        .setContent(contentString)
-        .openOn(map);
-    }
-    else { console.log('error in opening popup'); console.log(pos)}
-  });
-}
-
 function cleanAddress(qry_addr) {
   var cleaned_addr = 
     qry_addr.replace(/ street/ig, ' st')
@@ -77,6 +56,28 @@ function runQuery(qry_addr, options) {
         makePolygon(geojson, isAdvancedSearch=true);
       });
     });
+  });
+}
+
+function openPopup(coordinates) {
+  console.log(coordinates);
+  var latlng = L.latLng(coordinates[0], coordinates[1]);
+  var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
+
+  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
+  var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) 
+    {
+      var address = results[0]['formatted_address'];
+      
+      var contentString = "<p>" + address + "</p><p>"
+        + "<a href='feedback?address=" + address + "'>Send feedback about this address?</a></p>"
+      popup
+        .setLatLng(latlng)
+        .setContent(contentString)
+        .openOn(map);
+    }
+    else { console.log('error in opening popup'); console.log(coordinates)}
   });
 }
 
@@ -121,6 +122,12 @@ function makePolygon(geojson, isAdvancedSearch) {
         opacity: 0.65
       }
     }).addTo(map);
+
+    var centroid = JSON.parse(geojson.features[0].properties.st_asgeojson).coordinates;
+    var lat = centroid[1];
+    var lng = centroid[0];
+    centroid = [lat, lng];
+    openPopup(centroid);
   }
 }
 
