@@ -68,6 +68,9 @@ function init(){
 
   var sublayers = [vacantLotsGet, vacantBldgsGet, lienPropsGet, homesteadGet, invisibleLayer];
 
+  // Add navbar module
+
+  L.control.navbar().addTo(map);
 
   // -------------------------
   // Add geosearch module
@@ -97,11 +100,7 @@ function init(){
   map.addControl(sidebar);
   sidebar.setContent(config.sidebar_content);
   // -------------------------
-  // Add navbar module
 
-  L.control.navbar().addTo(map);
-
-  // -------------------------
 
 
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)
