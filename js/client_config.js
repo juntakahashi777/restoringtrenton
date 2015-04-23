@@ -10,9 +10,8 @@ var config =
    	sidebar_content : "<h1>Advanced Search</h1>\
 	    <form id='advanced_search' onSubmit='return advanced_geosearch();'>\
 	    <fieldset>\
-	    <legend>Query:</legend>\
 	    Address:<br>\
-	    <input type='text' id='address'>\
+	    <input type='text' class='form-control' id='address'>\
 	    <br>\
 	    Lot Type:<br>\
 	    <select id='parc_type'>\
