@@ -79,7 +79,7 @@ function init(){
       provider: new L.GeoSearch.Provider.Google()
   }).addTo(map);
 
-  L.easyButton('fa-search-plus', 
+  L.easyButton('fa-search', 
               function (){
                 sidebar.toggle();
               },
