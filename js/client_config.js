@@ -21,6 +21,17 @@ var config =
 	    <option value='OCCUPIED BLDG'>Occupied Building</option>\
 	    </select>\
 	    <br><br>\
+	    Condition:<br>\
+	    <select id='condition'>\
+	    <option value='any'>Select a condition</option>\
+	    <option value='dumping'>Dumping</option>\
+	    <option value='trash'>Trash</option>\
+	    <option value='xs'>Xs</option>\
+	    <option value='dilapidated'>Dilapidated</option>\
+	    <option value='unsecured'>Unsecured</option>\
+	    <option value='animals'>Animals</option>\
+	    </select>\
+	    <br><br>\
 	    <input type='submit' value='Go'>\
 	    </fieldset>\
 	    </form>\
