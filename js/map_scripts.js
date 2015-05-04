@@ -71,7 +71,7 @@ function openPopup(coordinates) {
       var address = results[0]['formatted_address'];
       
       var contentString = "<p>" + address + "</p><p>"
-        + "<a href='feedback?address=" + address + "'>Send feedback about this address?</a></p>"
+        + "<a href='feedback?address=" + address + "' target='_blank'>Send feedback about this address?</a></p>"
       popup
         .setLatLng(latlng)
         .setContent(contentString)
