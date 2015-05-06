@@ -1,6 +1,7 @@
 var map;
 var sql = new cartodb.SQL({ user: 'restoring-trenton', format: 'geojson' });
 var polygon;
+var searchPolygons = [];
 var searchResults = [];
 var searchModule;
 var sidebar;
@@ -101,6 +102,18 @@ function init(){
   sidebar.setContent(config.sidebar_content);
   // -------------------------
 
+  $(document).ready(function(){
+    $('#download').click(function(){
+      if (searchResults.length == 0)
+      {
+        alert('please run a search first!');
+      }
+      else
+      {
+        downloadCSV(searchResults);
+      }
+    });
+  });
 
 
   //holding the different layers we're creating from the cartodb base ('trenton_parcels', loaded from our cartoUrl)

@@ -36,7 +36,7 @@ var config =
 	    </fieldset>\
 	    </form>\
 	    </br></br></br>\
-	    <button type='button' class='btn btn-primary'>Download Search Output</button>\
+	    <button type='button' class='btn btn-primary' id='download'>Download Search Output</button>\
     ",
     search_results_limit : "100"
 }
