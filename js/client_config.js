@@ -32,9 +32,11 @@ var config =
 	    <option value='animals'>Animals</option>\
 	    </select>\
 	    <br><br>\
-	    <input type='submit' value='Go'>\
+	    <input type='submit' class='btn btn-primary' value='Go'>\
 	    </fieldset>\
 	    </form>\
+	    </br></br></br>\
+	    <button type='button' class='btn btn-primary'>Download Search Output</button>\
     ",
     search_results_limit : "100"
 }
