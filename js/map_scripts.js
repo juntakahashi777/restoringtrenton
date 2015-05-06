@@ -37,9 +37,10 @@ function runQuery(qry_addr, options) {
   var cleaned_addr = cleanAddress(qry_addr);
   console.log('running sql query: '+cleaned_addr);
 
-  searchResults.forEach(function(entry) {
+  searchPolygons.forEach(function(entry) {
     map.removeLayer(entry);
   });
+  searchResults = [];
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
   query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + cleaned_addr + "%25')";
@@ -54,6 +55,7 @@ function runQuery(qry_addr, options) {
       sql.execute(query_string)
       .done(function(geojson) {
         makePolygon(geojson, isAdvancedSearch=true);
+        searchResults.push(geojson);
       });
     });
   });
@@ -110,7 +112,7 @@ function makePolygon(geojson, isAdvancedSearch) {
       },
       onEachFeature : onEachFeature
     }).addTo(map);
-    searchResults.push(multipolygon);
+    searchPolygons.push(multipolygon);
   }
   else
   {
@@ -129,5 +131,15 @@ function makePolygon(geojson, isAdvancedSearch) {
     centroid = [lat, lng];
     openPopup(centroid);
   }
+}
+
+
+function downloadCSV(searchResultsArr) {
+  
+  // searchResultsArr.forEach(function(entry) {
+  //   console.log(entry);
+  // });
+  var json = JSON.stringify(searchResultsArr);
+  console.log(json);
 }
 
