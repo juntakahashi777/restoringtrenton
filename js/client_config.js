@@ -32,10 +32,10 @@ var config =
 	    "<div class='checkbox'><label><input type = 'checkbox' id='b_unsecured'>Unsecured</option></label></div>" +
 	    "<div class='checkbox'><label><input type = 'checkbox' id='b_animals'>Animals</option></label></div>" +
 	    "Conditions for lots:<br>" +
-	    "<div class='checkbox'><label><input type = 'checkbox' id='l_trash'>Trash</option></label></div>" +
 	    "<div class='checkbox'><label><input type = 'checkbox' id='l_dumping'>Dumping</option></label></div>" +
-	    "<div class='checkbox'><label><input type = 'checkbox' id='l_weeds'>Weeds</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_trash'>Trash</option></label></div>" +
 	    "<div class='checkbox'><label><input type = 'checkbox' id='l_unmaintained'>Unmaintained</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_weeds'>Weeds</option></label></div>" +
 	    "<br><br>" +
 	    "Redevelopment area:<br>" +
 	    "<select id='redev_area'>" +

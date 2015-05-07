@@ -74,7 +74,10 @@ function runQuery(qry_addr, options) {
     }
   }
   if (condition_string != '')
+  {
+    // condition_string = condition_string.substring(0, condition_string.length-1);
     query_string += "AND conditions LIKE '%25" + condition_string + "%25'";
+  }
 
 
   if (options.redev_area != 'any')
