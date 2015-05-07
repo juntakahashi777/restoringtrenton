@@ -19,7 +19,7 @@ function createMapLayer(map, cartoUrl, Zindex, sublayer) {
 }
 
 function showFeature(cartodb_id, pos) {
-  sql.execute("select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
+  sql.execute("select *, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = {{cartodb_id}}", {cartodb_id: cartodb_id} )
   .done(function(geojson) {
     makePolygon(geojson, isAdvancedSearch=false);
   });
@@ -96,26 +96,33 @@ function runQuery(qry_addr, options) {
   });
 }
 
-function openPopup(coordinates) {
-  console.log(coordinates);
+function openPopup(coordinates, feature) {
+  console.log(feature);
   var latlng = L.latLng(coordinates[0], coordinates[1]);
   var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
 
-  var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-  var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) 
-    {
-      var address = results[0]['formatted_address'];
-      
-      var contentString = "<p>" + address + "</p><p>"
+  var contentString = "<p>" + feature.properties.address + "</p><p>"
         + "<a href='feedback?address=" + address + "' target='_blank'>Send feedback about this address?</a></p>"
-      popup
-        .setLatLng(latlng)
-        .setContent(contentString)
-        .openOn(map);
-    }
-    else { console.log('error in opening popup'); console.log(coordinates)}
-  });
+  popup
+    .setLatLng(latlng)
+    .setContent(contentString)
+    .openOn(map);
+
+  // var geocoder = L.GeoSearch.Provider.Google.Geocoder;
+  // var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
+  //   if (status == google.maps.GeocoderStatus.OK) 
+  //   {
+  //     var address = results[0]['formatted_address'];
+      
+  //     var contentString = "<p>" + address + "</p><p>"
+  //       + "<a href='feedback?address=" + address + "' target='_blank'>Send feedback about this address?</a></p>"
+  //     popup
+  //       .setLatLng(latlng)
+  //       .setContent(contentString)
+  //       .openOn(map);
+  //   }
+  //   else { console.log('error in opening popup'); console.log(coordinates)}
+  // });
 }
 
 function onEachFeature(feature, layer) {
@@ -126,7 +133,7 @@ function onEachFeature(feature, layer) {
   centroid = [lat, lng];
 
   layer.on('click', function(e) {
-    openPopup(centroid);
+    openPopup(centroid, feature);
   });
 
 }
@@ -163,7 +170,7 @@ function makePolygon(geojson, isAdvancedSearch) {
     var lat = centroid[1];
     var lng = centroid[0];
     centroid = [lat, lng];
-    openPopup(centroid);
+    openPopup(centroid, geojson.features[0]);
   }
 }
 
