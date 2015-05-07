@@ -34,7 +34,13 @@ var config =
 	    "<option value='unsecured'>Unsecured</option>" +
 	    "<option value='animals'>Animals</option>" +
 	    "</select>" +
-	    "<br>" +
+	    "<br><br>" +
+	    "Redevelopment area:<br>" +
+	    "<select id='redevelopment_area'>" +
+	    "<option value='select'></option>" +
+	    "<option value='in_redev'>In Redevelopment Area</option>" +
+	    "<option value='not_redev'>Not In Redevelopment Area</option>" +
+	    "</select>" +
 	    "<br><br>" +
 	    "<input type='submit' class='btn btn-primary' value='Go'>" +
 	    "</fieldset>" +
