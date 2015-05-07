@@ -107,22 +107,6 @@ function openPopup(coordinates, feature) {
     .setLatLng(latlng)
     .setContent(contentString)
     .openOn(map);
-
-  // var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-  // var addr = geocoder.geocode({'latLng': g_latlng}, function(results, status) {
-  //   if (status == google.maps.GeocoderStatus.OK) 
-  //   {
-  //     var address = results[0]['formatted_address'];
-      
-  //     var contentString = "<p>" + address + "</p><p>"
-  //       + "<a href='feedback?address=" + address + "' target='_blank'>Send feedback about this address?</a></p>"
-  //     popup
-  //       .setLatLng(latlng)
-  //       .setContent(contentString)
-  //       .openOn(map);
-  //   }
-  //   else { console.log('error in opening popup'); console.log(coordinates)}
-  // });
 }
 
 function onEachFeature(feature, layer) {
