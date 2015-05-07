@@ -110,7 +110,7 @@ function init(){
       }
       else
       {
-        downloadCSV(searchResults);
+        formatJSON(searchResults);
       }
     });
   });

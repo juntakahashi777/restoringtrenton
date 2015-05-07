@@ -134,12 +134,24 @@ function makePolygon(geojson, isAdvancedSearch) {
 }
 
 
-function downloadCSV(searchResultsArr) {
-  
-  // searchResultsArr.forEach(function(entry) {
-  //   console.log(entry);
-  // });
-  var json = JSON.stringify(searchResultsArr);
-  console.log(json);
+function formatJSON(searchResultsArr) {
+  var featuresArr = [];
+  var propertiesArr = [];
+  console.log(JSON.stringify(searchResultsArr[0]));
+  searchResultsArr.forEach(function(entry) {
+    // console.log(entry);
+    featuresArr.push(entry.features[0]);
+    propertiesArr.push(entry.properties);
+  });
+
+  var json = {
+    type:"FeatureCollection",
+    features:featuresArr,
+  };
+
+
+  var uri = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(json));
+  window.open(uri, '_blank');
+  window.focus();  
 }
 
