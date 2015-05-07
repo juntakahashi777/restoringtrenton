@@ -51,7 +51,8 @@ function runQuery(qry_addr, options) {
   console.log('query string: ' + query_string);
   $.getJSON(config.sql_url+query_string, function(data) {
     $.each(data.rows, function(key, val) {
-      query_string = "select the_geom, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = " + val.cartodb_id;
+      query_string = "select *, ST_AsGeoJSON(ST_Centroid(the_geom)) from " + config.database_name + " where cartodb_id = " + val.cartodb_id;
+
       sql.execute(query_string)
       .done(function(geojson) {
         makePolygon(geojson, isAdvancedSearch=true);
@@ -102,7 +103,6 @@ function makePolygon(geojson, isAdvancedSearch) {
   }
   if (isAdvancedSearch)
   {
-
     var multipolygon = L.geoJson(geojson, { 
       style: {
         color: "#E10",
