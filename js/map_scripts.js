@@ -44,8 +44,36 @@ function runQuery(qry_addr, options) {
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
   query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + cleaned_addr + "%25')";
+  
   if (options.parc_type != 'any')
     query_string += " AND parc_type = '" + options.parc_type + "'";
+
+  var building_conditions = {b_animals:'ANIMALS', b_dilapidated:'DILAPIDATED', b_dumping:'DUMPING',
+    b_trash:'TRASH', b_unsecured:'UNSECURED', b_xs:'XS'}
+  var lot_conditions = {l_dumping:'DUMPING',l_trash:'TRASH',l_unmaintained:'UNMAINTAINED',l_weeds:'WEEDS'};
+  var condition_string = '';
+  for (b_id in building_conditions)
+  {
+    if ($('#'+b_id).is(":checked"))
+    {
+      // console.log(building_conditions[b_id]);
+      condition_string += building_conditions[b_id] + ' ';
+    }
+  }
+  for (l_id in lot_conditions)
+  {
+    if ($('#'+l_id).is(":checked"))
+    {
+      // console.log(lot_conditions[l_id]);
+      condition_string += lot_conditions[l_id] + ' ';
+    }
+  }
+  if (condition_string != '')
+  {
+    query_string += "AND conditions LIKE '%25" + condition_string + "%25'";
+  }
+
+
   query_string += " LIMIT " + config.search_results_limit;
 
   console.log('query string: ' + query_string);

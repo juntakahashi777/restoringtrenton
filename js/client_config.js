@@ -10,7 +10,7 @@ var config =
    	sidebar_content : "<h1>Advanced Search</h1>" +
 	    "<form id='advanced_search' onSubmit='return advanced_geosearch();'>" +
 	    "<fieldset>" +
-	    "Address:<br>" +
+	    "Street:<br>" +
 	    "<input type='text' class='form-control' id='address'>" +
 	    "<br>" +
 	    "Owner:<br>" +
@@ -24,16 +24,18 @@ var config =
 	    "<option value='OCCUPIED BLDG'>Occupied Building</option>" +
 	    "</select>" +
 	    "<br><br>" +
-	    "Condition:<br>" +
-	    "<select id='condition'>" +
-	    "<option value='any'>Select a condition</option>" +
-	    "<option value='dumping'>Dumping</option>" +
-	    "<option value='trash'>Trash</option>" +
-	    "<option value='xs'>Xs</option>" +
-	    "<option value='dilapidated'>Dilapidated</option>" +
-	    "<option value='unsecured'>Unsecured</option>" +
-	    "<option value='animals'>Animals</option>" +
-	    "</select>" +
+	    "Conditions for buildings:<br>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_dumping'>Dumping</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_trash'>Trash</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_xs'>Xs</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_dilapidated'>Dilapidated</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_unsecured'>Unsecured</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='b_animals'>Animals</option></label></div>" +
+	    "Conditions for lots:<br>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_trash'>Trash</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_dumping'>Dumping</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_weeds'>Weeds</option></label></div>" +
+	    "<div class='checkbox'><label><input type = 'checkbox' id='l_unmaintained'>Unmaintained</option></label></div>" +
 	    "<br><br>" +
 	    "Redevelopment area:<br>" +
 	    "<select id='redevelopment_area'>" +
