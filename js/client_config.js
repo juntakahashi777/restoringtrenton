@@ -50,5 +50,5 @@ var config =
 	    "</br></br></br>" +
 	    "<button type='button' class='btn btn-primary' id='download'>Download Search Output</button>"
     ,
-    search_results_limit : "100"
+    search_results_limit : "10000"
 }
