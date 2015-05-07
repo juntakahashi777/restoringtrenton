@@ -13,7 +13,7 @@ var config =
 	    "Street:<br>" +
 	    "<input type='text' class='form-control' id='address'>" +
 	    "<br>" +
-	    "Owner:<br>" +
+	    "Owner (lastname, firstname):<br>" +
 	    "<input type='text' class='form-control' id='owner'>" +
 	    "<br>" +
 	    "Lot Type:<br>" +
@@ -38,8 +38,8 @@ var config =
 	    "<div class='checkbox'><label><input type = 'checkbox' id='l_unmaintained'>Unmaintained</option></label></div>" +
 	    "<br><br>" +
 	    "Redevelopment area:<br>" +
-	    "<select id='redevelopment_area'>" +
-	    "<option value='select'></option>" +
+	    "<select id='redev_area'>" +
+	    "<option value='any'></option>" +
 	    "<option value='in_redev'>In Redevelopment Area</option>" +
 	    "<option value='not_redev'>Not In Redevelopment Area</option>" +
 	    "</select>" +

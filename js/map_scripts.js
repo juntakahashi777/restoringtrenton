@@ -44,9 +44,14 @@ function runQuery(qry_addr, options) {
 
   var query_string = "SELECT the_geom, address, cartodb_id, ST_AsGeoJSON(ST_Centroid(the_geom)) FROM " + config.database_name;
   query_string +=  " WHERE UPPER(address) LIKE UPPER('%25" + cleaned_addr + "%25')";
+
+  var owner = $('#owner').val();
+  if (owner != '')
+    query_string += " AND owner LIKE UPPER('%25" + owner + "%25')";
   
   if (options.parc_type != 'any')
     query_string += " AND parc_type = '" + options.parc_type + "'";
+
 
   var building_conditions = {b_animals:'ANIMALS', b_dilapidated:'DILAPIDATED', b_dumping:'DUMPING',
     b_trash:'TRASH', b_unsecured:'UNSECURED', b_xs:'XS'}
@@ -69,10 +74,11 @@ function runQuery(qry_addr, options) {
     }
   }
   if (condition_string != '')
-  {
     query_string += "AND conditions LIKE '%25" + condition_string + "%25'";
-  }
 
+
+  if (options.redev_area != 'any')
+    query_string += " AND redev_area is not NULL";
 
   query_string += " LIMIT " + config.search_results_limit;
 
