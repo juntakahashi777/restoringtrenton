@@ -104,8 +104,8 @@ function openPopup(coordinates, feature) {
   var latlng = L.latLng(coordinates[0], coordinates[1]);
   var g_latlng = new google.maps.LatLng(latlng.lat, latlng.lng);
 
-  var contentString = "<p>" + feature.properties.address + "</p><p>"
-        + "<a href='feedback?address=" + address + "' target='_blank'>Send feedback about this address?</a></p>"
+  var contentString = "<p>" + feature.properties.cartodb_id + "</p><p>"
+        + "<a href='feedback?address=" + feature.properties.cartodb_id + "' target='_blank'>Send feedback about this address?</a></p>"
   popup
     .setLatLng(latlng)
     .setContent(contentString)
