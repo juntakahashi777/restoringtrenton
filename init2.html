@@ -3,7 +3,7 @@
 <title>RESTORING TRENTON - INTERACTIVE MAP</title>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.‌​min.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 
 
@@ -38,13 +38,10 @@ stamen.addTo(map);
 
 var bases = { "stamen toner lite": stamen};
 
-  var masterJSON = L.GeoJSON.AJAX("https://github.com/juntakahashi777/restoringtrenton/blob/ID-local/trenton_master.geojson", {onEachFeature:popUp});
-
-  function popUp(feature, layer) {
-      layer.bindPopup(feature.properties.ADDRESS);
-      }
-
-  masterJSON.addTo(map); 
+  $.getJSON("trenton_master.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
 
 
 
