@@ -32,17 +32,19 @@
 <script type="text/javascript">
 
 var map = L.map('map').setView([40.224, -74.76], 15);
-var stamen = L.tileLayer('http://a.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {attribution: 'iana dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>with <a href="http://stamen.com">stamen toner lite</a>'});
+var stamen = L.tileLayer('http://a.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {attribution: 'iana dikidjieva + jun takahashi for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>with <a href="http://stamen.com">stamen toner lite</a>'});
 stamen.addTo(map);
 
 
 var bases = { "stamen toner lite": stamen};
 
-  // load GeoJSON from an external file
-  $.getJSON("bostonngbhdstest.geojson",function(data){
-    // add GeoJSON layer to the map once the file is loaded
-    L.geoJson(data).addTo(map);
-  });
+  var masterJSON = L.GeoJSON.AJAX("https://github.com/juntakahashi777/restoringtrenton/blob/ID-local/trenton_master.geojson", {onEachFeature:popUp});
+
+  function popUp(feature, layer) {
+      layer.bindPopup(feature.properties.ADDRESS);
+      }
+
+  masterJSON.addTo(map); 
 
 
 
