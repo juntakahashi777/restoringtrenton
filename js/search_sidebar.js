@@ -1,25 +1,11 @@
-function advanced_geosearch () {
-  var address = $('#address')[0].value;
-  var options = {};
-  options.parc_type = $('#parc_type')[0].value;
 
-  try {
-    searchModule.geosearch(address);
-    runQuery(address, options);
-    sidebar.hide();
-  }
-  catch (error) {
-  }
 
-  // returns false in order to prevent page redirect on form submit    
-  return false;
-}
-
+//this is our hinky advanced search magnifying glass
 L.Control.EasyButton = L.Control.extend({
     options: {
         position: 'topleft',
         title: '',
-        intendedIcon: 'fa-circle-o'
+        intendedIcon: 'fa-circle-o',
     },
 
     onAdd: function () {

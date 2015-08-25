@@ -20,7 +20,7 @@ L.Control.GeoSearch = L.Control.extend({
 
     _config: {
         country: '',
-        searchLabel: 'basic address search (click button on the left for advanced search)',
+        searchLabel: 'Basic Google address search (click the magnifying glass on the left to query the database)',
         notFoundMessage: 'Sorry, that address could not be found.',
         messageHideDelay: 3000,
         zoomLevel: 18

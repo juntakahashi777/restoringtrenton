@@ -4,7 +4,7 @@
 
 <head> 
   
-<title>Trenton Vacant Property Map</title>
+<title>RESTORING TRENTON - INTERACTIVE MAP</title>
   
     <meta charset="utf-8">
   
@@ -33,11 +33,31 @@
     <script type="text/javascript" src="/js/search_sidebar.js"></script>
     <script type="text/javascript" src="/js/map_init.js"></script>
 
+	
 
 </head>
 
 
 <body onload="init()">
+
+<style>
+.leaflet-control-layers-toggle:after{ 
+    content: "LAYERS"; 
+    color:#666 ;
+}
+.leaflet-control-layers-toggle{ 
+    width:auto;
+    background-position:3px 50% ;
+	padding-right:8px;
+    padding-left:36px;
+    text-decoration:none;
+    line-height:36px;
+
+} </style>
+
+
+
+  
 <div id="cartodb-map"></div>
 
 

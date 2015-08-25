@@ -1,0 +1,22 @@
+/*
+function makePolygon(geojson) {
+ // if (polygon) {
+ //   map.removeLayer(polygon);
+ // }
+    polygon = L.geoJson(geojson, {
+      style: {
+        color: "#fff",
+        fillColor: "#fff",
+        weight: 2,
+        opacity: 0.65
+      }
+    }).addTo(map);
+
+    var centroid = JSON.parse(geojson.features[0].properties.st_asgeojson).coordinates;
+    var lat = centroid[1];
+    var lng = centroid[0];
+    centroid = [lat, lng];
+    openPopup(centroid, geojson.features[0]);
+
+}
+*/

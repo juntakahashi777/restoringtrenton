@@ -29,9 +29,9 @@
       container = L.DomUtil.create('div', controlName + ' leaflet-bar');
 
       // Add toolbar buttons
-      this._homeButton = this._createButton(options.homeTitle, controlName + '-home', container, this._goHome);
-      this._fwdButton = this._createButton(options.forwardTitle, controlName + '-fwd', container, this._goFwd);
-      this._backButton = this._createButton(options.backTitle, controlName + '-back', container, this._goBack);
+     this._homeButton = this._createButton(options.homeTitle, controlName + '-home', container, this._goHome);
+     this._fwdButton = this._createButton(options.forwardTitle, controlName + '-fwd', container, this._goFwd);
+     this._backButton = this._createButton(options.backTitle, controlName + '-back', container, this._goBack);
 
       // Initialize view history and index
       this._viewHistory = [{center: this.options.center, zoom: this.options.zoom}];

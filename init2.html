@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>RESTORING TRENTON - INTERACTIVE MAP</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.‌​min.js"></script>
+
+
+
+</head>
+<body>
+
+<style>
+.leaflet-control-layers-toggle:after{ 
+    content: "LAYERS"; 
+    color:#666 ;
+}
+.leaflet-control-layers-toggle{ 
+    width:auto;
+    background-position:3px 50% ;
+	padding-right:8px;
+    padding-left:36px;
+    text-decoration:none;
+    line-height:36px;
+
+} </style>
+
+
+<div id="map" style="width: 100%; height: 100%;"></div>
+
+
+<script type="text/javascript">
+
+var map = L.map('map').setView([40.224, -74.76], 15);
+var stamen = L.tileLayer('http://a.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {attribution: 'iana dikidjieva for <a href="http://www.restoringtrenton.org">Restoring Trenton</a><br>with <a href="http://stamen.com">stamen toner lite</a>'});
+stamen.addTo(map);
+
+
+var bases = { "stamen toner lite": stamen};
+
+  // load GeoJSON from an external file
+  $.getJSON("bostonngbhdstest.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
+
+
+
+</script>
+</body>
+</html>
