@@ -1,4 +1,4 @@
-Retoring Trenton - Vacant Property Visualization Project
+Restoring Trenton - Vacant Property Visualization Project
 
 Vacant and abandoned properties are known to be a harmful presence in communities. Trenton unfortunately has over 6,000 abandoned lots and buildings, constituting ~20% of the city. This project has been developed in order to better visualize the vacant property data gathered by the non-profit organization Isles, Inc. as well as provide a tool for interacting with the data.
 
